@@ -37,10 +37,11 @@ namespace UnityPUBG.Scripts.UI
 
         public bool Available
         {
-            get { return available; }
-            set
-            {
-                available = value;
+            graphicRaycaster = transform.root.GetComponent<GraphicRaycaster>();
+            siblingIndex = transform.GetSiblingIndex();
+            planeDistance = transform.root.GetComponent<Canvas>().planeDistance;
+
+            slotImage = transform.GetChild(0).GetComponent<Image>();
 
             //Debug.Log(slotImage.gameObject);
         }
