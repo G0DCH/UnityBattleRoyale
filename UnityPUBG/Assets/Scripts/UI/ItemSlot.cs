@@ -23,13 +23,17 @@ namespace UnityPUBG.Scripts.UI
         public Sprite defaultSlotSprite;
         public TMPro.TextMeshProUGUI itemCountText;
 
-        private bool available;
-        private bool isDrag = false;
-        private Vector3 originPosition;
-        private GraphicRaycaster graphicRaycaster;
+        /// <summary>
+        /// 빈 슬롯 이미지
+        /// </summary>
+        [SerializeField]
+        private Sprite emptySlotImage;
 
-        //마지막 터치 시간
-        private static float lastTouchTime = 0f;
+        /// <summary>
+        /// 현재 슬롯 이미지
+        /// </summary>
+        private Image slotImage = null;
+
 
         public bool Available
         {
@@ -38,18 +42,7 @@ namespace UnityPUBG.Scripts.UI
             {
                 available = value;
 
-                if (value == false)
-                {
-                    backgroundImage.sprite = defaultBackGroundSprite;
-                    slotImage.sprite = defaultSlotSprite;
-                    itemCountText.text = string.Empty;
-                }
-
-                Color newColor = backgroundImage.color;
-                newColor.a = value ? 1f : 0.25f;
-                backgroundImage.color = newColor;
-                slotImage.color = newColor;
-            }
+            //Debug.Log(slotImage.gameObject);
         }
 
         #region Unity 콜백
@@ -86,19 +79,7 @@ namespace UnityPUBG.Scripts.UI
             }
             else
             {
-                slotImage.sprite = itemAtSlot.Data.Icon;
-                itemCountText.text = itemAtSlot.CurrentStack.ToString();
-
-                for (int quickBarSlot = 0; quickBarSlot < targetPlayer.ItemQuickBar.Length; quickBarSlot++)
-                {
-                    ItemData itemDataAtQuickSlot = targetPlayer.ItemQuickBar[quickBarSlot];
-                    if (itemDataAtQuickSlot != null && itemDataAtQuickSlot.ItemName.Equals(itemAtSlot.Data.ItemName))
-                    {
-                        backgroundImage.sprite = quickSlotBackgroundSprite;
-                        return;
-                    }
-                }
-                backgroundImage.sprite = defaultBackGroundSprite;
+                slotImage.sprite = item.Data.Icon;
             }
         }
 
