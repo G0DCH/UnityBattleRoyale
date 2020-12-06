@@ -235,15 +235,7 @@ namespace UnityPUBG.Scripts.Entities
             }
 
             ItemContainer = new ItemContainer(defaultContainerCapacity);
-            ItemQuickBar = new ItemData[quickBarCapacity];
-            myAnimator = GetComponent<Animator>();
-
-            //장착하지 않았으므로 emptyItem으로 초기화
-            EquipedArmor = Item.EmptyItem;
-            EquipedBackpack = Item.EmptyItem;
-            EquipedPrimaryWeapon = Item.EmptyItem;
-            EquipedSecondaryWeapon = Item.EmptyItem;
-
+            ItemQuickBar = new Item[quickBarCapacity];
             for (int slot = 0; slot < ItemQuickBar.Length; slot++)
             {
                 ItemQuickBar[slot] = null;

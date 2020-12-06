@@ -150,11 +150,13 @@ namespace UnityPUBG.Scripts.Logic
         {
             if (inventoryUIElements.activeSelf)
             {
+                DisableChild(window);
                 normalUIElements.SetActive(true);
                 inventoryUIElements.SetActive(false);
             }
             else
             {
+                EnableChild(window);
                 normalUIElements.SetActive(false);
                 inventoryUIElements.SetActive(true);
             }
@@ -195,7 +197,11 @@ namespace UnityPUBG.Scripts.Logic
             }
         }
 
-        public void UpdateEquipItemSlots()
+        /// <summary>
+        /// 인자로 받은 게임 오브젝트의 자식 오브젝트를 disable함
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void DisableChild(GameObject gameObject)
         {
             foreach (var equipItemSlot in inventoryEquipItemSlots)
             {

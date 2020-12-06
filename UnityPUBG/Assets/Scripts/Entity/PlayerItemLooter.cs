@@ -96,61 +96,25 @@ namespace UnityPUBG.Scripts.Entities
             // TODO: 실드 내구도가 더 많이 남아있는 경우도 true
             switch (lootItem.Data)
             {
-                case ArmorData ammoData:
-                    if (player.EquipedArmor.IsStackEmpty || player.EquipedArmor.Data.Rarity < ammoData.Rarity)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case BackpackData backpackData:
-                    if (player.EquipedBackpack.IsStackEmpty || player.EquipedBackpack.Data.Rarity < backpackData.Rarity)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case WeaponData weaponData:
-                    if (player.EquipedPrimaryWeapon.Data.GetType().Equals(weaponData.GetType()) && player.EquipedPrimaryWeapon.Data.Rarity < weaponData.Rarity)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case AmmoData ammoData:
-                    if (player.EquipedPrimaryWeapon.Data is RangeWeaponData)
-                    {
-                        var requireAmmoName = (player.EquipedPrimaryWeapon.Data as RangeWeaponData).RequireAmmo.ItemName;
-                        if (requireAmmoName.Equals(ammoData.ItemName))
-                        {
-                            var sameAmmoAtConatainer = player.ItemContainer.TryGetItemFromLast(requireAmmoName);
-                            if (sameAmmoAtConatainer.IsStackEmpty || sameAmmoAtConatainer.IsStackFull == false)
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                    else if (player.EquipedSecondaryWeapon.Data is RangeWeaponData)
-                    {
-                        var requireAmmoName = (player.EquipedSecondaryWeapon.Data as RangeWeaponData).RequireAmmo.ItemName;
-                        if (requireAmmoName.Equals(ammoData.ItemName))
-                        {
-                            var sameAmmoAtConatainer = player.ItemContainer.TryGetItemFromLast(requireAmmoName);
-                            if (sameAmmoAtConatainer.IsStackEmpty || sameAmmoAtConatainer.IsStackFull == false)
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                    break;
-
-                default:
-                    var sameItemAtContainer = player.ItemContainer.TryGetItemFromLast(lootItem.Data.ItemName);
-                    if (sameItemAtContainer.IsStackEmpty == false && sameItemAtContainer.IsStackFull == false)
-                    {
-                        return true;
-                    }
-                    break;
+                if (player.EquipedArmor == null || player.EquipedArmor.Data.Rarity < lootItem.Data.Rarity)
+                {
+                    return true;
+                }
+            }
+            else if (lootItem.Data is BackpackData)
+            {
+                if (player.EquipedBackpack == null || player.EquipedBackpack.Data.Rarity < lootItem.Data.Rarity)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                var sameItemAtContainer = player.ItemContainer.TryGetItem(lootItem.Data.ItemName);
+                if (sameItemAtContainer.IsStackEmpty == false && sameItemAtContainer.IsStackFull == false)
+                {
+                    return true;
+                }
             }
 
             return false;

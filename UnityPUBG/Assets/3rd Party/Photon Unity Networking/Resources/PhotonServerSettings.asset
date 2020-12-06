@@ -34,9 +34,6 @@ MonoBehaviour:
   - DestroyRpc
   - IncreaseOnBoardPlayerCount
   - InstantiateRpc
-  - NotifyLaunchDropShip
-  - NotifyPathData
-  - NotifyStartRingSystem
   - PickupItemInit
   - PlayLootAnimation
   - PunPickup
@@ -48,8 +45,9 @@ MonoBehaviour:
   - SyncRoundDatas
   - UpdateCurrentStack
   - UpdateItem
-  - WhatModelChoose
-  - WhatWeaponEquiped
-  - UpdateShieldItem
-  - FadeInWinnerResultPanel
+  - LaunchDropShip
+  - SetupPathData
+  - NotifyLaunchDropShip
+  - NotifyPathData
+  - FireProjectile
   DisableAutoOpenWizard: 1
