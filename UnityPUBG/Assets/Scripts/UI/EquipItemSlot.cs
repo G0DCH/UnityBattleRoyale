@@ -53,7 +53,13 @@ namespace UnityPUBG.Scripts.UI
                 case ItemType.SecondaryWeapon:
                     if(!myPlayer.EquipedSecondaryWeapon.IsStackEmpty)
                     {
-                        itemImage.sprite = myPlayer.EquipedSecondaryWeapon.Data.Icon;
+                        itemIcon.sprite = myPlayer.EquipedSecondaryWeapon.Data.Icon;
+                    }
+                    break;
+                case ItemType.Armor:
+                    if (!myPlayer.EquipedArmor.IsStackEmpty)
+                    {
+                        itemIcon.sprite = myPlayer.EquipedArmor.Data.Icon;
                     }
                     break;
             }
